@@ -127,5 +127,86 @@ await navigator.clipboard.writeText("real_swarit");
 
 });
 }
+// ===== SWARIT CREATION CYBER INTRO =====
+
+(() => {
+  const loader = document.getElementById("intro-loader");
+  const portal = document.getElementById("energyPortal");
+  const typedText = document.getElementById("cyberTypedText");
+
+  if (!loader) return;
+
+  let finished = false;
+  let typingTimer;
+  let finishTimer;
+
+  const message = "Web Development & Full-Stack Specialist";
+
+  document.body.classList.add("intro-active");
+
+  function finishIntro() {
+    if (finished) return;
+    finished = true;
+
+    clearInterval(typingTimer);
+    clearTimeout(finishTimer);
+
+    loader.classList.add("intro-finished");
+    document.body.classList.remove("intro-active");
+
+    setTimeout(() => {
+      loader.remove();
+    }, 900);
+  }
+
+  function activatePortal(event) {
+    if (event) event.stopPropagation();
+
+    if (finished || loader.classList.contains("portal-activated")) return;
+
+    loader.classList.add("portal-activated");
+
+    // Reveal the name and specialization sooner
+    const identity = loader.querySelector(".cyber-identity");
+    if (identity) {
+      identity.style.animationDelay = "0s";
+    }
+
+    setTimeout(finishIntro, 1300);
+  }
+
+  // Clicking the portal triggers the portal transition.
+  portal?.addEventListener("click", activatePortal);
+
+  // Clicking anywhere else skips the intro.
+  loader.addEventListener("click", (event) => {
+    if (event.target.closest("#energyPortal")) return;
+    finishIntro();
+  });
+
+  // Terminal typing effect
+  setTimeout(() => {
+    if (finished || !typedText) return;
+
+    let index = 0;
+
+    typingTimer = setInterval(() => {
+      if (finished) {
+        clearInterval(typingTimer);
+        return;
+      }
+
+      typedText.textContent = message.slice(0, index + 1);
+      index++;
+
+      if (index >= message.length) {
+        clearInterval(typingTimer);
+      }
+    }, 48);
+  }, 1750);
+
+  // Automatically finish after the intro has played.
+  finishTimer = setTimeout(finishIntro, 7500);
+})();
 
 // Update footer year automatically if you decide to add one later.
