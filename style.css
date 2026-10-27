@@ -486,4 +486,87 @@ code { color: var(--blue); background: rgba(99,215,255,.08); padding: 2px 5px; b
 }
 
 @keyframes portalRotate {
-  t
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portalFlare {
+  0% { transform: scale(.8); opacity: .8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes portalCollapse {
+  to {
+    transform: scale(.05);
+    opacity: 0;
+    filter: blur(12px);
+  }
+}
+
+@keyframes portalBurst {
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+    filter: blur(20px);
+  }
+}
+
+@keyframes cyberIdentityReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes cyberGradient {
+  to { background-position: 300% center; }
+}
+
+@keyframes cyberGridMove {
+  to { background-position: 0 90px; }
+}
+
+@keyframes cyberGlowPulse {
+  50% { transform: scale(1.15); opacity: .65; }
+}
+
+@keyframes cyberFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes cyberLoad {
+  to { width: 100%; }
+}
+
+@keyframes terminalBlink {
+  to { visibility: hidden; }
+}
+
+@media (max-width: 480px) {
+  .cyber-overline {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .energy-portal {
+    width: 125px;
+    height: 125px;
+  }
+
+  .portal-core {
+    width: 52px;
+    height: 52px;
+  }
+
+  .cyber-description {
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #intro-loader *,
+  #intro-loader::before {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+  }
+}
